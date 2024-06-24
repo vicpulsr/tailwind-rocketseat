@@ -77,7 +77,7 @@ export const Sidebar = () => {
           <NavItem icon={Home} title="Home" />
           <NavItem icon={BarChart} title="Dashboard" />
           <NavItem icon={SquareStack} title="Projects" />
-          <NavItem icon={CheckSquare} title="Tasks" />
+          <NavItem icon={CheckSquare} title="Tasks" href="/tasks" />
           <NavItem icon={Flag} title="Reporting" />
           <NavItem icon={Users} title="Users" />
         </nav>
