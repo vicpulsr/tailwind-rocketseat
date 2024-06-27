@@ -13,14 +13,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isDarkMode } = useDarkMNode();
+  const { isDarkMode } = useDarkMNode((state) => ({
+    isDarkMode: state.isDarkMode,
+  }));
 
   return (
     <html lang="en" className={`antialiased ${isDarkMode && "dark"}`}>
       <body className={inter.className}>
-        <div className="lg:grid min-h-screen lg:grid-cols-app dark:bg-zinc-900">
+        <div className="min-h-screen dark:bg-zinc-900 lg:grid lg:grid-cols-app">
           <Sidebar />
-          <main className="px-4 pb-12 pt-24 lg:col-start-2 lg:px-8 lg:pt-8 max-w-screen">{children}</main>
+          <main className="max-w-screen px-4 pb-12 pt-24 lg:col-start-2 lg:px-8 lg:pt-8">
+            {children}
+          </main>
         </div>
       </body>
     </html>

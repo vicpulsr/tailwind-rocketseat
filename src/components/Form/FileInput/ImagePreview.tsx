@@ -16,7 +16,10 @@ export const ImagePreview = () => {
   if (previewURL === undefined) {
     return (
       <div className="flex size-16 items-center justify-center rounded-full bg-violet-50 dark:bg-violet-500/10">
-        <User className="size-8 text-violet-500 dark:text-violet-300" />
+        <User
+          data-testid="icon-image-preview"
+          className="size-8 text-violet-500 dark:text-violet-300"
+        />
       </div>
     );
   } else {
@@ -25,6 +28,7 @@ export const ImagePreview = () => {
         src={previewURL}
         alt="Preview"
         className="size-16 rounded-full object-cover"
+        data-testid="img-image-preview"
       />
     );
   }

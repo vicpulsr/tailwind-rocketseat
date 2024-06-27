@@ -26,9 +26,15 @@ import * as Switch from "@radix-ui/react-switch";
 import { Button } from "../Button";
 import { useState } from "react";
 import { useDarkMNode } from "@/stores/use-dark-mode";
+import { useShallow } from "zustand/react/shallow";
 
 export const Sidebar = () => {
-  const { isDarkMode, setIsDarkMode } = useDarkMNode();
+  const { isDarkMode, setIsDarkMode } = useDarkMNode(
+    useShallow((state) => ({
+      isDarkMode: state.isDarkMode,
+      setIsDarkMode: state.setIsDarkMode,
+    })),
+  );
 
   return (
     <Collapsible.Root
@@ -77,7 +83,7 @@ export const Sidebar = () => {
           <NavItem icon={Home} title="Home" />
           <NavItem icon={BarChart} title="Dashboard" />
           <NavItem icon={SquareStack} title="Projects" />
-          <NavItem icon={CheckSquare} title="Tasks" />
+          <NavItem icon={CheckSquare} title="Tasks" href="/tasks" />
           <NavItem icon={Flag} title="Reporting" />
           <NavItem icon={Users} title="Users" />
         </nav>

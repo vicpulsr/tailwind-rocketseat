@@ -3,7 +3,7 @@ import { ComponentProps, createContext, useContext, useId, useState } from "reac
 
 export type RootProps = ComponentProps<'div'>
 
-type FileInputContextType = {
+export type FileInputContextType = {
     id: string;
     files: File[];
     onFilesSelected: (files: File[], multiple: boolean) => void;
