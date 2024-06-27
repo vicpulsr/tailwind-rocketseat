@@ -26,9 +26,15 @@ import * as Switch from "@radix-ui/react-switch";
 import { Button } from "../Button";
 import { useState } from "react";
 import { useDarkMNode } from "@/stores/use-dark-mode";
+import { useShallow } from "zustand/react/shallow";
 
 export const Sidebar = () => {
-  const { isDarkMode, setIsDarkMode } = useDarkMNode();
+  const { isDarkMode, setIsDarkMode } = useDarkMNode(
+    useShallow((state) => ({
+      isDarkMode: state.isDarkMode,
+      setIsDarkMode: state.setIsDarkMode,
+    })),
+  );
 
   return (
     <Collapsible.Root

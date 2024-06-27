@@ -8,6 +8,7 @@ import {
 import { columns as baseColumns } from "./components/Column";
 import { useTasks } from "@/stores/use-tasks";
 import { Trash } from "lucide-react";
+import { useShallow } from "zustand/react/shallow";
 
 export interface Task {
   id: number;
@@ -16,7 +17,12 @@ export interface Task {
 }
 
 const TaskTable: React.FC = () => {
-  const { tasks, deleteTask } = useTasks();
+  const { tasks, deleteTask } = useTasks(
+    useShallow((state) => ({
+      tasks: state.tasks,
+      deleteTask: state.deleteTask,
+    })),
+  );
 
   const columns = React.useMemo(
     () =>
@@ -42,7 +48,7 @@ const TaskTable: React.FC = () => {
   const table = useReactTable({
     data: tasks,
     columns,
-    
+
     getCoreRowModel: getCoreRowModel(),
     // getPaginationRowModel: getPaginationRowModel(),
   });
