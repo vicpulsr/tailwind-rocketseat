@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { tasks } from "../mocks/tasks";
 
 export interface Task {
   id: number;
@@ -12,29 +13,26 @@ type TasksProps = {
   deleteTask: (id: number) => void;
 };
 
-export const useTasks = create<TasksProps>((set) => ({
-  tasks: [
-    { id: 1, task: "Tarefa 1", description: "Descrição da tarefa 1" },
-    { id: 2, task: "Tarefa 2", description: "Descrição da tarefa 2" },
-    { id: 3, task: "Tarefa 3", description: "Descrição da tarefa 3" },
-    { id: 4, task: "Tarefa 4", description: "Descrição da tarefa 1" },
-    { id: 5, task: "Tarefa 6", description: "Descrição da tarefa 2" },
-    { id: 6, task: "Tarefa 7", description: "Descrição da tarefa 3" },
-    { id: 7, task: "Tarefa 8", description: "Descrição da tarefa 1" },
-    { id: 8, task: "Tarefa 9", description: "Descrição da tarefa 2" },
-    { id: 9, task: "Tarefa 10", description: "Descrição da tarefa 3" },
-    { id: 10, task: "Tarefa 11", description: "Descrição da tarefa 3" },
-    { id: 11, task: "Tarefa 12", description: "Descrição da tarefa 1" },
-    { id: 12, task: "Tarefa 13", description: "Descrição da tarefa 2" },
-    { id: 13, task: "Tarefa 14", description: "Descrição da tarefa 3" },
-    { id: 14, task: "Tarefa 15", description: "Descrição da tarefa 3" },
-  ],
+export const useTasks = create<TasksProps>((set, get) => ({
+  tasks: tasks,
   createTask: (task) => {
+    const idAlreadyExists = tasks.some((t) => t.id === task.id);
+
+    if (idAlreadyExists) {
+      throw new Error("Task with this ID already exists");
+    }
+    
     set((state) => ({
       tasks: [...state.tasks, task],
     }));
   },
   deleteTask: (id) => {
+    const idExists = tasks.find((task) => task.id === id) !== undefined;
+
+    if (!idExists) {
+      throw new Error("Task not found");
+    }
+
     set((state) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
     }));
