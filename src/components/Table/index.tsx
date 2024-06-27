@@ -32,6 +32,7 @@ const TaskTable: React.FC = () => {
             ...column,
             cell: ({ row }: any) => (
               <button
+                data-testid={`delete-${row.original.id}`}
                 className="flex h-full w-full items-center justify-center text-zinc-500"
                 onClick={() => deleteTask(row.original.id)}
               >
