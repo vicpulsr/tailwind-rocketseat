@@ -83,9 +83,12 @@ export const Sidebar = () => {
           <NavItem icon={Home} title="Home" />
           <NavItem icon={BarChart} title="Dashboard" />
           <NavItem icon={SquareStack} title="Projects" />
-          <NavItem icon={CheckSquare} title="Tasks" href="/tasks" />
           <NavItem icon={Flag} title="Reporting" />
           <NavItem icon={Users} title="Users" />
+          <NavItem icon={CheckSquare} title="Tasks">
+            <NavItem icon={CheckSquare} title="CreateTasks" href="/tasks/create" />
+            <NavItem icon={CheckSquare} title="Table" href="/tasks/table" />
+          </NavItem>
         </nav>
 
         <div className="mt-auto flex flex-col gap-6">
