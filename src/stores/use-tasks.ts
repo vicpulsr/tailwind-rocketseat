@@ -16,6 +16,7 @@ type TasksProps = {
 export const useTasks = create<TasksProps>((set, get) => ({
   tasks: tasks,
   createTask: (task) => {
+    const tasks = get().tasks;
     const idAlreadyExists = tasks.some((t) => t.id === task.id);
 
     if (idAlreadyExists) {
@@ -26,7 +27,8 @@ export const useTasks = create<TasksProps>((set, get) => ({
       tasks: [...state.tasks, task],
     }));
   },
-  deleteTask: (id) => {
+  deleteTask: (id: number) => {
+    const tasks = get().tasks;
     const idExists = tasks.find((task) => task.id === id) !== undefined;
 
     if (!idExists) {
