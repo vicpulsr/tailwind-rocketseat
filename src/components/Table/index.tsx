@@ -10,12 +10,6 @@ import { useTasks } from "@/stores/use-tasks";
 import { Trash } from "lucide-react";
 import { useShallow } from "zustand/react/shallow";
 
-export interface Task {
-  id: number;
-  task: string;
-  description: string;
-}
-
 const TaskTable: React.FC = () => {
   const { tasks, deleteTask } = useTasks(
     useShallow((state) => ({
